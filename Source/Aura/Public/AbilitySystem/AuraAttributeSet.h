@@ -55,6 +55,35 @@ public:
 	virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
+
+	/*
+	 * Primary attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Strength, Category = "Primary Attributes")
+	FGameplayAttributeData Strength;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Strength);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Intelligence, Category = "Primary Attributes")
+	FGameplayAttributeData Intelligence;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Intelligence);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Toughness, Category = "Primary Attributes")
+	FGameplayAttributeData Toughness;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Toughness);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Agility, Category = "Primary Attributes")
+	FGameplayAttributeData Agility;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Agility);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Finesse, Category = "Primary Attributes")
+	FGameplayAttributeData Finesse;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Finesse);
+
+	
+	/*
+	 * Vital attributes
+	 */
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
 	FGameplayAttributeData Health;
@@ -83,6 +112,21 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+	UFUNCTION()
+	void OnRep_Strength(const FGameplayAttributeData& OldStrength) const;
+
+	UFUNCTION()
+	void OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const;
+
+	UFUNCTION()
+	void OnRep_Toughness(const FGameplayAttributeData& OldToughness) const;
+
+	UFUNCTION()
+	void OnRep_Agility(const FGameplayAttributeData& OldAgility) const;
+
+	UFUNCTION()
+	void OnRep_Finesse(const FGameplayAttributeData& OldFinesse) const;
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) 
