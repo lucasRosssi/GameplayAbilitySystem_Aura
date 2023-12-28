@@ -69,7 +69,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Secondary_MovementSpeed = UGameplayTagsManager::Get()
 	.AddNativeGameplayTag(
 		FName("Attributes.Secondary.MovementSpeed"),
-		FString("Walking and running speed")
+		FString("Running speed and dodge range")
 		);
 
 	GameplayTags.Attributes_Secondary_CriticalRate = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -80,7 +80,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Secondary_CriticalDamage = UGameplayTagsManager::Get()
 	.AddNativeGameplayTag(
 		FName("Attributes.Secondary.CriticalDamage"),
-		FString("Amount of damage a critical hit deals")
+		FString("Percentage of damage a critical hit deals")
 		);
 
 	GameplayTags.Attributes_Secondary_HealthRegeneration = UGameplayTagsManager::Get().AddNativeGameplayTag(
