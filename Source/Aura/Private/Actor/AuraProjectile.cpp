@@ -5,6 +5,9 @@
 
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+#include "Interaction/CombatInterface.h"
 
 AAuraProjectile::AAuraProjectile()
 {
@@ -28,7 +31,54 @@ AAuraProjectile::AAuraProjectile()
 void AAuraProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+	SetLifeSpan(LifeSpan);
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAuraProjectile::OnSphereOverlap);
+
+	auto CombatInterface = Cast<ICombatInterface>(GetInstigator());
+
+	if (CombatInterface)
+	{
+		if (MuzzleEffect)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				this,
+				MuzzleEffect,
+				CombatInterface->GetProjectileSocketLocation(),
+				GetActorRotation()
+			);
+		}
+			
+		if (MuzzleSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				MuzzleSound,
+				CombatInterface->GetProjectileSocketLocation(),
+				GetActorRotation()
+			);
+		}
+	}
+
+}
+
+void AAuraProjectile::Destroyed()
+{
+	if (!bHit && !HasAuthority())
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+			this,
+			ImpactSound,
+			GetActorLocation(),
+			FRotator::ZeroRotator
+		);
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+			this,
+			ImpactEffect,
+			GetActorLocation()
+		);
+	}
+	
+	Super::Destroyed();
 }
 
 void AAuraProjectile::OnSphereOverlap(
@@ -40,5 +90,24 @@ void AAuraProjectile::OnSphereOverlap(
 	const FHitResult& SweepResult
 )
 {
-	
+	UGameplayStatics::PlaySoundAtLocation(
+		this,
+		ImpactSound,
+		GetActorLocation(),
+		FRotator::ZeroRotator
+	);
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+		this,
+		ImpactEffect,
+		GetActorLocation()
+	);
+
+	if (HasAuthority())
+	{
+		Destroy();
+	}
+	else
+	{
+		bHit = true;
+	}
 }

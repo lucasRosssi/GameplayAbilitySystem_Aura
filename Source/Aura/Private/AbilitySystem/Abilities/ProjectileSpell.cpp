@@ -17,7 +17,7 @@ void UProjectileSpell::ActivateAbility(
 	
 }
 
-void UProjectileSpell::SpawnProjectile()
+void UProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 {
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
@@ -26,10 +26,12 @@ void UProjectileSpell::SpawnProjectile()
 	if (CombatInterface)
 	{
 		const FVector SocketLocation = CombatInterface->GetProjectileSocketLocation();
+		FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
+		Rotation.Pitch = 0.f;
 
 		FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
-		//TODO: Set the Projectile Rotation
+		SpawnTransform.SetRotation(Rotation.Quaternion());
 		
 		AActor* OwningActor = GetOwningActorFromActorInfo();
 		
@@ -37,12 +39,12 @@ void UProjectileSpell::SpawnProjectile()
 			ProjectileClass,
 			SpawnTransform,
 			OwningActor,
-			Cast<APawn>(OwningActor),
+			Cast<APawn>(CombatInterface),
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 		);
 
 		//TODO: Give the Projectile a Gameplay Effect Spec for causing Damage.
-
+		
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }
