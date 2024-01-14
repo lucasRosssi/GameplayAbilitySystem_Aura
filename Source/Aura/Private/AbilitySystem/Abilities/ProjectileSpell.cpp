@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/Abilities/ProjectileSpell.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "Actor/AuraProjectile.h"
 #include "Interaction/CombatInterface.h"
 
@@ -22,7 +24,8 @@ void UProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
 
-	ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo());
+	AActor* AvatarActor = GetAvatarActorFromActorInfo();
+	ICombatInterface* CombatInterface = Cast<ICombatInterface>(AvatarActor);
 	if (CombatInterface)
 	{
 		const FVector SocketLocation = CombatInterface->GetProjectileSocketLocation();
@@ -39,11 +42,19 @@ void UProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 			ProjectileClass,
 			SpawnTransform,
 			OwningActor,
-			Cast<APawn>(CombatInterface),
+			Cast<APawn>(AvatarActor),
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn
 		);
 
-		//TODO: Give the Projectile a Gameplay Effect Spec for causing Damage.
+		const UAbilitySystemComponent* SourceASC = GetAbilitySystemComponentFromActorInfo();
+		
+		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(
+			DamageEffectClass,
+			GetAbilityLevel(),
+			SourceASC->MakeEffectContext()
+		);
+
+		Projectile->DamageEffectSpecHandle = SpecHandle;
 		
 		Projectile->FinishSpawning(SpawnTransform);
 	}
