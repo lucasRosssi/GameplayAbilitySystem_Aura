@@ -59,7 +59,7 @@ void UAuraAbilitySystemLibrary::InitializeDefaultAttributes(
 	);
 	if (!AuraGameMode) return;
 
-	AActor* AvatarActor = ASC->GetAvatarActor();
+	const AActor* AvatarActor = ASC->GetAvatarActor();
 
 	UCharacterClassInfo* CharacterClassInfo =  AuraGameMode->CharacterClassInfo;
 	const auto [PrimaryAttributes] = CharacterClassInfo
