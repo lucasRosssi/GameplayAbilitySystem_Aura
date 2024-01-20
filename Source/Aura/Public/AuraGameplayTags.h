@@ -48,6 +48,8 @@ public:
 
 	FGameplayTag Effects_HitReact;
 
+	FGameplayTag Abilities_HitReact;
+
 private:
 	static FAuraGameplayTags GameplayTags;
 };

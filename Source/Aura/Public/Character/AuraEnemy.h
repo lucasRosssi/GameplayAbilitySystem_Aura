@@ -27,6 +27,7 @@ public:
 
 	/** Combat Interface */
 	virtual int32 GetCharacterLevel() override;
+	virtual void Die() override;
 	/** end Combat Interface */
 
 	UPROPERTY(BlueprintAssignable)
