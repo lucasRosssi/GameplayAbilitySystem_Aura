@@ -149,6 +149,14 @@ public:
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Stamina);
 
 	/*
+	 * Special attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ParryChance, Category = "Special Attributes")
+	FGameplayAttributeData ParryChance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, ParryChance);
+
+	/*
 	 * Meta attributes
 	 */
 	
@@ -227,6 +235,13 @@ public:
 
 	UFUNCTION()
 	void OnRep_StaminaRegeneration(const FGameplayAttributeData& OldStaminaRegeneration) const;
+
+	/*
+	 * Special
+	 */
+
+	UFUNCTION()
+	void OnRep_ParryChance(const FGameplayAttributeData& OldParryChance) const;
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) 

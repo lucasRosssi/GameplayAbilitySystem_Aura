@@ -106,6 +106,15 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		);
 
 	/*
+	 * SPECIAL ATTRIBUTES
+	 */
+
+	GameplayTags.Attributes_Special_ParryChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Special.ParryChance"),
+		FString("Chance to parry an attack and negate damage")
+		);
+
+	/*
 	 * INPUT TAGS
 	 */
 

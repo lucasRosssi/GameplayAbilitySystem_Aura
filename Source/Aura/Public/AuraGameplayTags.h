@@ -37,6 +37,8 @@ public:
   FGameplayTag Attributes_Secondary_StaminaRegeneration;
   FGameplayTag Attributes_Secondary_StaminaEfficiency;
 
+	FGameplayTag Attributes_Special_ParryChance;
+
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
 	FGameplayTag InputTag_1;

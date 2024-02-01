@@ -266,3 +266,8 @@ void UAuraAttributeSet
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, StaminaRegeneration, OldStaminaRegeneration);
 }
+
+void UAuraAttributeSet::OnRep_ParryChance(const FGameplayAttributeData& OldParryChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UAuraAttributeSet, ParryChance, OldParryChance);
+}
