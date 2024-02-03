@@ -10,10 +10,10 @@ struct FAuraGameplayEffectContext : public FGameplayEffectContext
 
 public:
 	bool IsCriticalHit() const { return bCriticalHit; }
-	bool IsParry() const { return bParry; }
+	bool IsParried() const { return bParried; }
 
 	void SetIsCriticalHit(bool bInCriticalHit) { bCriticalHit = bInCriticalHit; }
-	void SetIsParry(bool bInParry) { bParry = bInParry; }
+	void SetIsParry(bool bInParry) { bParried = bInParry; }
 	
 	/** Returns the actual struct used for serialization, subclasses must override this! */
 	virtual UScriptStruct* GetScriptStruct() const
@@ -26,7 +26,7 @@ public:
 	
 protected:
 	UPROPERTY()
-	bool bParry = false;
+	bool bParried = false;
 	UPROPERTY()
 	bool bCriticalHit = false;
 };
