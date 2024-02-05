@@ -62,7 +62,6 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 void AAuraCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
 	AbilitySystemComponent
 		->RegisterGameplayTagEvent(

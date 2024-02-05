@@ -4,8 +4,10 @@
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 
 #include "AbilitySystemComponent.h"
+#include "AuraAbilityTypes.h"
 #include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 
 struct AuraDamageStatics
@@ -92,6 +94,9 @@ void UExecCalc_Damage::Execute_Implementation(
 	TargetParryChance = FMath::Max<float>(TargetParryChance, 0.f);
 	const bool bParried = FMath::RandRange(1, 100) <= TargetParryChance;
 
+	FGameplayEffectContextHandle EffectContextHandle = Spec.GetContext();
+	UAuraAbilitySystemLibrary::SetIsParried(EffectContextHandle, bParried);
+
 	if (bParried)
 	{
 		Damage = 0.f;
@@ -106,6 +111,8 @@ void UExecCalc_Damage::Execute_Implementation(
 		);
 		SourceCriticalRate = FMath::Max<float>(SourceCriticalRate, 0.f);
 		const bool bCriticalHit = FMath::RandRange(1, 100) <= SourceCriticalRate;
+
+		UAuraAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bCriticalHit);
 
 		if (bCriticalHit)
 		{
