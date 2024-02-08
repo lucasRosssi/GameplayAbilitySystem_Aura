@@ -152,7 +152,12 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	}
 }
 
-void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bParried, bool bCriticalHit) const
+void UAuraAttributeSet::ShowFloatingText(
+	const FEffectProperties& Props,
+	float Damage,
+	bool bParried,
+	bool bCriticalHit
+) const
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{
@@ -162,7 +167,7 @@ void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float D
 
 		if (PC)
 		{
-			PC->ShowDamageNumber(Damage, Props.TargetCharacter);
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bParried, bCriticalHit);
 		}
 	}
 }

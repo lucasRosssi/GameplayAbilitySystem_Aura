@@ -23,7 +23,12 @@ void AMainPlayerController::PlayerTick(float DeltaTime)
 	CursorTrace();	
 }
 
-void AMainPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter)
+void AMainPlayerController::ShowDamageNumber_Implementation(
+		float DamageAmount,
+		ACharacter* TargetCharacter,
+		bool bParried,
+		bool bCriticalHit
+	)
 {
 	if (IsValid(TargetCharacter) && DamageTextComponentClass)
 	{
@@ -37,7 +42,7 @@ void AMainPlayerController::ShowDamageNumber_Implementation(float DamageAmount, 
 			FAttachmentTransformRules::KeepRelativeTransform
 		);
 		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		DamageText->SetDamageText(DamageAmount);
+		DamageText->SetDamageText(DamageAmount, bParried, bCriticalHit);
 	}
 }
 
