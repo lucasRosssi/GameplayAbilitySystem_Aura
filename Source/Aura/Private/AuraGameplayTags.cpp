@@ -157,6 +157,13 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FString("Damage")
 		);
 
+	GameplayTags.Damage_Energy = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Energy"),
+		FString("Energy damage type")
+		);
+
+	GameplayTags.DamageTypes.Add(GameplayTags.Damage_Energy);
+
 	/*
 	 * Effects Tags
 	 */
