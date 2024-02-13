@@ -37,20 +37,30 @@ public:
   FGameplayTag Attributes_Secondary_StaminaRegeneration;
   FGameplayTag Attributes_Secondary_StaminaEfficiency;
 
+	FGameplayTag Attributes_Resistance_Physical;
+	FGameplayTag Attributes_Resistance_Energy;
+	FGameplayTag Attributes_Resistance_Fire;
+	FGameplayTag Attributes_Resistance_Ice;
+	FGameplayTag Attributes_Resistance_Lightning;
+
 	FGameplayTag Attributes_Special_ParryChance;
 
+	FGameplayTag Damage;
+	FGameplayTag Damage_Physical;
+	FGameplayTag Damage_Energy;
+	FGameplayTag Damage_Fire;
+	FGameplayTag Damage_Ice;
+	FGameplayTag Damage_Lightning;
+
+	TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
+	
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
 	FGameplayTag InputTag_1;
 	FGameplayTag InputTag_2;
 	FGameplayTag InputTag_3;
 	FGameplayTag InputTag_4;
-
-	FGameplayTag Damage;
-	FGameplayTag Damage_Energy;
-
-	TArray<FGameplayTag> DamageTypes;
-
+	
 	FGameplayTag Effects_HitReact;
 
 	FGameplayTag Abilities_HitReact;

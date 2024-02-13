@@ -149,6 +149,31 @@ public:
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Stamina);
 
 	/*
+	 * Resistance attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData PhysicalResistance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, PhysicalResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_EnergyResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData EnergyResistance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, EnergyResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_FireResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData FireResistance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, FireResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IceResistance, Category = "Resistance Attributes")
+	FGameplayAttributeData IceResistance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IceResistance);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LightningResistance, Category = 
+	"Resistance tributes")
+	FGameplayAttributeData LightningResistance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, LightningResistance);
+
+	/*
 	 * Special attributes
 	 */
 
@@ -235,6 +260,25 @@ public:
 
 	UFUNCTION()
 	void OnRep_StaminaRegeneration(const FGameplayAttributeData& OldStaminaRegeneration) const;
+
+	/*
+	 * Resistance
+	 */
+
+	UFUNCTION()
+	void OnRep_PhysicalResistance(const FGameplayAttributeData& OldPhysicalResistance) const;
+
+	UFUNCTION()
+	void OnRep_EnergyResistance(const FGameplayAttributeData& OldEnergyResistance) const;
+
+	UFUNCTION()
+	void OnRep_FireResistance(const FGameplayAttributeData& OldFireResistance) const;
+
+	UFUNCTION()
+	void OnRep_IceResistance(const FGameplayAttributeData& OldIceResistance) const;
+
+	UFUNCTION()
+	void OnRep_LightningResistance(const FGameplayAttributeData& OldLightningResistance) const;
 
 	/*
 	 * Special

@@ -94,6 +94,13 @@ void AAuraProjectile::OnSphereOverlap(
 	const FHitResult& SweepResult
 )
 {
+	const TSharedPtr<FGameplayEffectSpec> SpecHandleData = DamageEffectSpecHandle.Data;
+	// OtherActor is the instigator
+	if (!SpecHandleData.IsValid() || SpecHandleData.Get()->GetContext().GetEffectCauser() == OtherActor)
+	{
+		return;
+	}
+	
 	UGameplayStatics::PlaySoundAtLocation(
 		this,
 		ImpactSound,

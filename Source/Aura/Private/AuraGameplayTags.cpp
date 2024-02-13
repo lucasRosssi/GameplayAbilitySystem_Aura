@@ -149,7 +149,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		);
 
 	/*
-	 * Damage Tag
+	 * Damage Tags
 	 */
 
 	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -157,13 +157,89 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FString("Damage")
 		);
 
+	GameplayTags.Damage_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Physical"),
+		FString("Physical damage type")
+		);
+	
 	GameplayTags.Damage_Energy = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Energy"),
 		FString("Energy damage type")
 		);
 
-	GameplayTags.DamageTypes.Add(GameplayTags.Damage_Energy);
+	GameplayTags.Damage_Fire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Fire"),
+		FString("Fire damage type")
+		);
 
+	GameplayTags.Damage_Ice = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Ice"),
+		FString("Ice damage type")
+		);
+
+	GameplayTags.Damage_Lightning = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Lightning"),
+		FString("Lightning damage type")
+		);
+	
+	/*
+	 * Resistances Tags
+	 */
+
+	GameplayTags.Attributes_Resistance_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Resistance.Physical"),
+		FString("Resistance to Physical damage")
+		);
+
+	GameplayTags.Attributes_Resistance_Energy = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Resistance.Energy"),
+		FString("Resistance to Energy damage")
+		);
+
+	GameplayTags.Attributes_Resistance_Fire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Resistance.Fire"),
+		FString("Resistance to Fire damage")
+		);
+
+	GameplayTags.Attributes_Resistance_Ice = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Resistance.Ice"),
+		FString("Resistance to Ice damage")
+		);
+
+	GameplayTags.Attributes_Resistance_Lightning = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Resistance.Lightning"),
+		FString("Resistance to Lightning damage")
+		);
+
+	/*
+	 * Map of Damage Types to Resistances
+	 */
+
+	GameplayTags.DamageTypesToResistances.Add(
+		GameplayTags.Damage_Physical, 
+		GameplayTags.Attributes_Resistance_Physical
+	);
+	
+	GameplayTags.DamageTypesToResistances.Add(
+		GameplayTags.Damage_Energy, 
+		GameplayTags.Attributes_Resistance_Energy
+	);
+
+	GameplayTags.DamageTypesToResistances.Add(
+		GameplayTags.Damage_Fire, 
+		GameplayTags.Attributes_Resistance_Fire
+	);
+
+	GameplayTags.DamageTypesToResistances.Add(
+		GameplayTags.Damage_Ice, 
+		GameplayTags.Attributes_Resistance_Ice
+	);
+
+	GameplayTags.DamageTypesToResistances.Add(
+		GameplayTags.Damage_Lightning, 
+		GameplayTags.Attributes_Resistance_Lightning
+	);
+	
 	/*
 	 * Effects Tags
 	 */
@@ -174,7 +250,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		);
 
 	/*
-	 * Abilities Tag
+	 * Abilities Tags
 	 */
 
 	GameplayTags.Abilities_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(

@@ -62,16 +62,6 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation()
 void AAuraCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	AbilitySystemComponent
-		->RegisterGameplayTagEvent(
-			FAuraGameplayTags::Get().Effects_HitReact,
-			EGameplayTagEventType::NewOrRemoved
-		)
-		.AddUObject(
-			this,
-			&AAuraCharacterBase::HitReactTagChanged
-		);
 }
 
 void AAuraCharacterBase::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
@@ -118,9 +108,20 @@ void AAuraCharacterBase::InitializeDefaultAttributes() const
 
 void AAuraCharacterBase::AddCharacterAbilities()
 {
+	if (!HasAuthority()) return;
+
+	AbilitySystemComponent
+		->RegisterGameplayTagEvent(
+			FAuraGameplayTags::Get().Effects_HitReact,
+			EGameplayTagEventType::NewOrRemoved
+		)
+		.AddUObject(
+			this,
+			&AAuraCharacterBase::HitReactTagChanged
+		);
+	
 	UAuraAbilitySystemComponent* AuraASC =
 		CastChecked<UAuraAbilitySystemComponent>(AbilitySystemComponent);
-	if (!HasAuthority()) return;
 
 	AuraASC->AddCharacterAbilities(StartupAbilities);
 }

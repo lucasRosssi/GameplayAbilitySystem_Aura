@@ -30,7 +30,7 @@ void AMainPlayerController::ShowDamageNumber_Implementation(
 		bool bCriticalHit
 	)
 {
-	if (IsValid(TargetCharacter) && DamageTextComponentClass)
+	if (IsValid(TargetCharacter) && DamageTextComponentClass && IsLocalController())
 	{
 		UDamageTextComponent* DamageText = NewObject<UDamageTextComponent>(
 			TargetCharacter,
